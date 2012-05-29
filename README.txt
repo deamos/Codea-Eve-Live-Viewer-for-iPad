@@ -1,6 +1,7 @@
 Eve Live Viewer 0.66a
 Author: David Lockwood
 ----------------------------------
+Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
 
 All icons and images are the property of CCP Games.
 
