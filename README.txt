@@ -1,4 +1,4 @@
-Eve Live Viewer 0.65a
+Eve Live Viewer 0.66a
 Author: David Lockwood
 ----------------------------------
 
