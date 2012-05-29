@@ -8,7 +8,7 @@ All icons and images are the property of CCP Games.
 Requirements:
 ------------
 An iPad loaded with the Codea App.  (http://itunes.apple.com/us/app/codify/id439571171?ls=1&mt=8)
-
+iExplorer (http://www.macroplant.com/iexplorer/)
 
 Install:
 ------------
