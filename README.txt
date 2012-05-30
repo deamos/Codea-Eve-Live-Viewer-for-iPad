@@ -19,9 +19,8 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v0.66a:
+Known Issues v0.67a:
 -------------
--Many TypeIDs are missing still.  If a notificaion lists its Ship Type as a typeID number, please let Deamos know the typeID number via Eve-Mail.
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
@@ -31,7 +30,8 @@ Version History:
 --Fixed ISK value bugs
 --Integrated ISK Values in to Notifications
 --Added Various Missing TypeIDs
---Cleaned up Eve-Kill REST API parsing to parse more accurately 
+--Cleaned up Eve-Kill REST API parsing to parse more accurately
+--TypeID Problems have been cleared up using a bit of Python Magic. Keep an eye out for any strays.
 
 -v0.66a (5/29/2012)
 --Fixed Communication Error not displaying and causing horrible, horrible crash.
