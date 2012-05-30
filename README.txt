@@ -27,10 +27,15 @@ Known Issues v0.66a:
 
 Version History:
 -------------
--v0.66a (5/29/2012)
--Fixed Communication Error not displaying and causing horrible, horrible crash.
--Locked Orientation to Portrait Until Landscape Bugs fixed.
+-v0.67a ()
+--Fixed ISK value bugs
+--Integrated ISK Values in to Notifications
+--Added Various Missing TypeIDs
+--Cleaned up Eve-Kill REST API parsing to parse more accurately 
 
+-v0.66a (5/29/2012)
+--Fixed Communication Error not displaying and causing horrible, horrible crash.
+--Locked Orientation to Portrait Until Landscape Bugs fixed.
 
 -v0.65a (5/28/2012) 
 --Cleaned up the UI. 
