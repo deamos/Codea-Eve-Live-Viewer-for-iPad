@@ -2,7 +2,6 @@ function getEveKillData()
     date=os.date('!*t',os.time())
     
     currentTimeFormat=date.year.."-"..date.month.."-"..date.day.."_"..(date.hour).."."..(date.min-5).."."..date.sec
-    
     eveKill=nil
     http.get("http://eve-kill.net/epic/startDate:"..currentTimeFormat.."/mask:458743",didGetEveKillData,didNotGetEveKillData)
     
@@ -44,6 +43,8 @@ function didGetEveKillData(data,status,headers)
         timestamp = stripQuotes(timestamp)
         
         local killID = eveKillData[i]["internalID"]
+        
+        local isk = eveKillData[i]["ISK"]
 
         --If the data is malformed, will ignore this kill
         if eveKillData[i]["victimShipID"] == nil then
@@ -57,7 +58,7 @@ function didGetEveKillData(data,status,headers)
         local solarSystemName = eveKillData[i]["solarSystemName"]
         solarSystemName = stripQuotes(solarSystemName)
         
-        newNotification = {victimName,solarSystemName,victimShipType, victimShipID, victimID,victimCorpName,victimAllianceName,FBName, FBCorpName,FBAllianceName,involvedPartyCount,timestamp,killID}
+        newNotification = {victimName,solarSystemName,victimShipType, victimShipID, victimID,victimCorpName,victimAllianceName,FBName, FBCorpName,FBAllianceName,involvedPartyCount,timestamp,killID,isk}
         notifyHandle:push("Kill",newNotification)
     end
 end
@@ -72,31 +73,31 @@ function parseEveKillData(data)
     
     eveKill = data
     eveKill=string.sub(eveKill,2,string.len(eveKill))
+    
     eveKill=split(eveKill,"},")
     for i = 0,table.maxn(eveKill) do
         if eveKill[i] ~= nil then
             data=string.sub(eveKill[i],2,string.len(eveKill[i]))
+            data = data .. ","
             mainKill[i]=split(data,",")
+            
         end
     end
     
     for k,l in ipairs(mainKill) do
         local subData={}
         for m,n in ipairs(mainKill[k]) do
+            local header = string.match(n,'"[%a]+":')
             
-            local headerBegan, headerEnd, header = string.find(n,'(%a+":)')
+            local value = string.sub(n,string.len(header)+1,string.len(n))
             
-            headerEnd = headerEnd + 1
-            n = string.sub(n,headerEnd,string.len(n))
-            local value = n
-            
-            header = string.sub(header,1,string.len(header)-2)
+            header = string.sub(header,2,string.len(header)-2)
+        
             subData[header] = value
             
         end
         parsedData[k]=subData
     end
-    
     
     return parsedData
 end

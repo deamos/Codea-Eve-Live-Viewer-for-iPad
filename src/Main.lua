@@ -5,8 +5,8 @@ function setup()
     saveProjectInfo("Description", "Eve Online Real-Time Killmail Display")
     
     setInstructionLimit(0)
-    displayMode(FULLSCREEN_NO_BUTTONS)
-    --displayMode(FULLSCREEN)
+    --displayMode(FULLSCREEN_NO_BUTTONS)
+    displayMode(FULLSCREEN)
     backingMode(STANDARD)
     
     setDefaultValues()

@@ -1,5 +1,5 @@
 function setDefaultValues()
-version = "0.66a"
+version = "0.67a"
 database = "Escalation"
 
 screen = "MAP"
@@ -38,6 +38,7 @@ searchBoxYMulti = 30
 
 totalNotifications = 0
 totalKillNotifications = 0
+totalISK = 0
 
 appTimer = os.clock()
 currentClock = 99999999999999

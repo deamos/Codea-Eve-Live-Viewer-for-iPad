@@ -6,13 +6,13 @@
 	<string>David Lockwood</string>
 	<key>Buffer Order</key>
 	<array>
+		<string>Main</string>
 		<string>EveKillFunctions</string>
 		<string>GetDataFunctions</string>
 		<string>ImageFunctions</string>
 		<string>invTypes</string>
 		<string>KMFilterDrawFunctions</string>
 		<string>KMFilterTouchFunctions</string>
-		<string>Main</string>
 		<string>MainFunctions</string>
 		<string>MainFunctionsDrawing</string>
 		<string>MainFunctionsTouch</string>
@@ -21,7 +21,7 @@
 		<string>mapSolarSystem</string>
 		<string>mapSolarSystemJumps</string>
 		<string>Notification</string>
-		<string>Round</string>
+		<string>MathFunctions</string>
 		<string>SearchBox</string>
 		<string>SettingsFunctionsDrawing</string>
 		<string>SettingsFunctionTouch</string>
