@@ -58,6 +58,7 @@ kmFiltersToggle = false
 kmFiltersList={}
 kmFiltersRegionToggle = false
 KMFilterIsk = 0
+kmFiltersShipClassToggle = false
 
 end
 

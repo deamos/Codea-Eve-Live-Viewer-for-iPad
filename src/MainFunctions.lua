@@ -94,6 +94,7 @@ function loadSavedData()
     kmFiltersRegionToggle = readLocalData("kmFiltersRegionToggle",kmFiltersRegionToggle)
     infoBar = readLocalData("infoBar",infoBar)
     KMFilterIsk = readLocalData("KMFilterIsk",KMFilterIsk)
+    kmFiltersShipClassToggle = readLocalData("kmFiltersShipClassToggle",kmFiltersShipClassToggle)
     
 end
 
@@ -118,6 +119,7 @@ function saveSettings()
     saveLocalData("kmFiltersRegionToggle",kmFiltersRegionToggle)
     saveLocalData("infoBar",infoBar)
     saveLocalData("KMFilterIsk",KMFilterIsk)
+    saveLocalData("kmFiltersShipClassToggle",kmFiltersShipClassToggle)
 end
 
 function openSettings()

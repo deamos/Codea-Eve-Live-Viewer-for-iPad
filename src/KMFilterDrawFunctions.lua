@@ -4,6 +4,8 @@ function drawKMFiltersScreen()
     drawKMFiltersRegionButtons()
     drawKMFilterRegionToggle()
     drawKMFilterIskButtons()
+    drawKMFilterShipClassToggle()
+    drawKMFilterShipClass()
     
 end
 
@@ -458,6 +460,228 @@ function drawKMFilterIskButtons()
     fill(255, 255, 255, 255)
     text(txt,buttonPos.x+90,buttonPos.y+12)
     popStyle()
+end
+
+function drawKMFilterShipClassButton(origShipClass, POS)
+    pushStyle()
+    local shipClass = origShipClass
+    local buttonPos = POS
+    
+    if shipClass == "Heavy Assault Ship" then
+        shipClass = "Heavy Assault"
+    elseif shipClass == "Indy Command Ship" then
+        shipClass = "Industrial Command Ship"
+    elseif shipClass == "Electronic Attack" then
+        shipClass = "Electronic Attack Ship"
+    elseif shipClass == "Cap. Industrial" then
+        shipClass = "Capital Industrial Ship"
+    elseif shipClass == "Other Modules" then
+        shipClass = "Customs Offices"
+    end
+    
+    local found = false
+    for i,j in ipairs(kmFiltersList) do
+        if string.lower(j) == string.lower(shipClass) then
+            fill(20, 72, 181, 255)
+            found = true
+        end
+    end
+    if found == false then
+        fill(31, 29, 64, 255)
+    end
+    rect(buttonPos.x,buttonPos.y,180,24)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(origShipClass,buttonPos.x+90,buttonPos.y+12)
+    popStyle()
+end
+
+function drawKMFilterShipClassToggle()
+    pushStyle()
+    if kmFiltersShipClassToggle == true then
+        fill(20, 72, 181, 255)
+    elseif kmFiltersShipClassToggle == false then
+        fill(31, 29, 64, 255)
+    end
+    rect(160,HEIGHT-635,48,28)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    local txt = nil
+    if kmFiltersShipClassToggle == true then
+        txt = "On"
+    elseif kmFiltersShipClassToggle == false then
+        txt = "Off"
+    end
+    text(txt,160+24,HEIGHT-635+14)
+    
+    popStyle()
+end
+
+
+function drawKMFilterShipClass()
+    
+    pushStyle()
+    font("AmericanTypewriter")
+    fontSize(22)
+    fill(255, 255, 255, 255)
+    textMode(CORNER)
+    textAlign(LEFT)
+    text("Ship Classes",25,HEIGHT-635)
+    popStyle()
+    
+    local shipClass = "Noobship"
+    local buttonPos = vec2(25,HEIGHT-670)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Capsule"
+    local buttonPos = vec2(207,HEIGHT-670)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Shuttle"
+    local buttonPos = vec2(389,HEIGHT-670)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Frigate"
+    local buttonPos = vec2(571,HEIGHT-670)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Destroyer"
+    local buttonPos = vec2(25,HEIGHT-696)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Cruiser"
+    local buttonPos = vec2(207,HEIGHT-696)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Battlecruiser"
+    local buttonPos = vec2(389,HEIGHT-696)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Battleship"
+    local buttonPos = vec2(571,HEIGHT-696)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Industrial"
+    local buttonPos = vec2(25,HEIGHT-722)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Transport"
+    local buttonPos = vec2(207,HEIGHT-722)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Freighter"
+    local buttonPos = vec2(389,HEIGHT-722)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Jump Freighter"
+    local buttonPos = vec2(571,HEIGHT-722)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Mining Barge"
+    local buttonPos = vec2(25,HEIGHT-748)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Exhumer"
+    local buttonPos = vec2(207,HEIGHT-748)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Indy Command Ship"
+    local buttonPos = vec2(389,HEIGHT-748)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Cap. Industrial"
+    local buttonPos = vec2(571,HEIGHT-748)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Assault Frigate"
+    local buttonPos = vec2(25,HEIGHT-774)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Interceptor"
+    local buttonPos = vec2(207,HEIGHT-774)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Electronic Attack"
+    local buttonPos = vec2(389,HEIGHT-774)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Covert Ops"
+    local buttonPos = vec2(571,HEIGHT-774)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Interdictor"
+    local buttonPos = vec2(25,HEIGHT-800)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Heavy Interdictor"
+    local buttonPos = vec2(207,HEIGHT-800)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Command Ship"
+    local buttonPos = vec2(389,HEIGHT-800)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Heavy Assault Ship"
+    local buttonPos = vec2(571,HEIGHT-800)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Logistics"
+    local buttonPos = vec2(25,HEIGHT-826)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Recon Ship"
+    local buttonPos = vec2(207,HEIGHT-826)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Strategic Cruiser"
+    local buttonPos = vec2(389,HEIGHT-826)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Black Ops"
+    local buttonPos = vec2(571,HEIGHT-826)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Marauder"
+    local buttonPos = vec2(25,HEIGHT-852)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "Carrier"
+    local buttonPos = vec2(207,HEIGHT-852)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Supercarrier"
+    local buttonPos = vec2(389,HEIGHT-852)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Dreadnought"
+    local buttonPos = vec2(571,HEIGHT-852)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    --
+    local shipClass = "Titan"
+    local buttonPos = vec2(25,HEIGHT-878)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    local shipClass = "POS Modules"
+    local buttonPos = vec2(207,HEIGHT-878)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+    
+    local shipClass = "Other Modules"
+    local buttonPos = vec2(389,HEIGHT-878)
+    drawKMFilterShipClassButton(shipClass, buttonPos)
+
+    
 end
 
 

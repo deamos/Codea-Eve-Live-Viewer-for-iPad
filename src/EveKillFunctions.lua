@@ -61,7 +61,7 @@ function didGetEveKillData(data,status,headers)
         local solarSystemName = eveKillData[i]["solarSystemName"]
         solarSystemName = stripQuotes(solarSystemName)
         
-        newNotification = {victimName,solarSystemName,victimShipType, victimShipID, victimID,victimCorpName,victimAllianceName,FBName, FBCorpName,FBAllianceName,involvedPartyCount,timestamp,killID,isk}
+        newNotification = {victimName,solarSystemName,victimShipType, victimShipID, victimID,victimCorpName,victimAllianceName,FBName, FBCorpName,FBAllianceName,involvedPartyCount,timestamp,killID,isk,victimShipClass}
         notifyHandle:push("Kill",newNotification)
     end
 end

@@ -99,22 +99,55 @@ function Notification:draw()
         elseif kmFiltersToggle == true then
             if kmFiltersRegionToggle == true then
                 if iskValue >= KMFilterIsk then
-                    for i,n in ipairs(kmFiltersList) do
-                        if n == regionName then
-                            self:handleNotificationTimer()
-                            self:drawBeacon(xval,yval)
-                            self:drawBox()
-                            --self:drawSysIndicator()
-                            self:drawKill(systemName,regionName,secStatus)
+                    if kmFiltersShipClassToggle == true then
+                        for j,k in ipairs(kmFiltersList) do
+                            if string.lower(k) == string.lower(victimShipClass) then
+                        
+                                for i,n in ipairs(kmFiltersList) do
+                                    if n == regionName then
+                                        self:handleNotificationTimer()
+                                        self:drawBeacon(xval,yval)
+                                        self:drawBox()
+                                        --self:drawSysIndicator()
+                                        self:drawKill(systemName,regionName,secStatus)
+                                    end
+                                end
+                            end
                         end
+                    
+                    elseif kmFiltersShipClassToggle == false then
+                        for i,n in ipairs(kmFiltersList) do
+                            if n == regionName then
+                                self:handleNotificationTimer()
+                                self:drawBeacon(xval,yval)
+                                self:drawBox()
+                                --self:drawSysIndicator()
+                                self:drawKill(systemName,regionName,secStatus)
+                            end
+                        end
+                        
                     end
                 end
-            elseif iskValue >= KMFilterIsk then
+            elseif (kmFiltersRegionToggle == false) and kmFiltersShipClassToggle == false and (iskValue >= KMFilterIsk) then
                 self:handleNotificationTimer()
                 self:drawBeacon(xval,yval)
                 self:drawBox()
                 --self:drawSysIndicator()
                 self:drawKill(systemName,regionName,secStatus)
+            
+            elseif kmFiltersRegionToggle == false and kmFiltersShipClassToggle == true and (iskValue >= KMFilterIsk) then
+                for i,n in ipairs(kmFiltersList) do
+                    if victimShipClass == nil then
+                        print("nil")
+                    end
+                    if string.lower(n) == string.lower(victimShipClass) then
+                        self:handleNotificationTimer()
+                        self:drawBeacon(xval,yval)
+                        self:drawBox()
+                        --self:drawSysIndicator()
+                        self:drawKill(systemName,regionName,secStatus)
+                    end
+                end
             end             
         elseif iskValue >= KMFilterIsk then
             self:handleNotificationTimer()

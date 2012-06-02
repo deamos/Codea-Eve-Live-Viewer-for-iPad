@@ -3,6 +3,8 @@ function KMFilterHandleTouches(touch)
     KMFilterHandleRegionToggle(touch)
     KMFilterHandleRegionButtons(touch)
     KMFilterHandleISKButtons(touch)
+    KMFilterHandleShipClassToggle(touch)
+    KMFilterHandleShipClass(touch)
 end
 
 function KMFilterHandleExit(touch)
@@ -368,5 +370,193 @@ function KMFilterHandleISKButtons(touch)
             return
         end
     end
+end
+
+function KMFilterHandleShipClassToggle(touch)
+
+    if touch.x >= 160 and touch.x <= 160+48 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-635 and touch.y <= HEIGHT-635+28 then
+            kmFiltersShipClassToggle = not kmFiltersShipClassToggle
+            sound(SOUND_PICKUP, 26808)
+        end
+    end
+end
+
+function KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    if touch.x >= buttonPos.x and touch.x <= buttonPos.x+180 and touch.state == BEGAN then
+        if touch.y >= buttonPos.y and touch.y <= buttonPos.y+24 then
+            local found = false
+            for i,j in ipairs(kmFiltersList) do
+                if string.lower(j) == string.lower(shipClass) then
+                    table.remove(kmFiltersList,i)
+                    found = true
+                end
+            end
+            if found == false then
+                table.insert(kmFiltersList,shipClass)
+            end
+            sound(SOUND_PICKUP, 26808)
+        end
+    end
+end
+
+function KMFilterHandleShipClass(touch)
+    local shipClass = "Noobship"
+    local buttonPos = vec2(25,HEIGHT-670)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Capsule"
+    local buttonPos = vec2(207,HEIGHT-670)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Shuttle"
+    local buttonPos = vec2(389,HEIGHT-670)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Frigate"
+    local buttonPos = vec2(571,HEIGHT-670)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Destroyer"
+    local buttonPos = vec2(25,HEIGHT-696)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Cruiser"
+    local buttonPos = vec2(207,HEIGHT-696)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Battlecruiser"
+    local buttonPos = vec2(389,HEIGHT-696)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Battleship"
+    local buttonPos = vec2(571,HEIGHT-696)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Industrial"
+    local buttonPos = vec2(25,HEIGHT-722)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Transport"
+    local buttonPos = vec2(207,HEIGHT-722)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Freighter"
+    local buttonPos = vec2(389,HEIGHT-722)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Jump Freighter"
+    local buttonPos = vec2(571,HEIGHT-722)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Mining barge"
+    local buttonPos = vec2(25,HEIGHT-748)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Exhumer"
+    local buttonPos = vec2(207,HEIGHT-748)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Industrial Command Ship"
+    local buttonPos = vec2(389,HEIGHT-748)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Capital Industrial Ship"
+    local buttonPos = vec2(571,HEIGHT-748)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Assault frigate"
+    local buttonPos = vec2(25,HEIGHT-774)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Interceptor"
+    local buttonPos = vec2(207,HEIGHT-774)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Electronic Attack Ship"
+    local buttonPos = vec2(389,HEIGHT-774)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Covert ops"
+    local buttonPos = vec2(571,HEIGHT-774)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Interdictor"
+    local buttonPos = vec2(25,HEIGHT-800)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Heavy Interdictor"
+    local buttonPos = vec2(207,HEIGHT-800)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Command ship"
+    local buttonPos = vec2(389,HEIGHT-800)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Heavy assault"
+    local buttonPos = vec2(571,HEIGHT-800)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Logistics"
+    local buttonPos = vec2(25,HEIGHT-826)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Recon ship"
+    local buttonPos = vec2(207,HEIGHT-826)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Strategic Cruiser"
+    local buttonPos = vec2(389,HEIGHT-826)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Black Ops"
+    local buttonPos = vec2(571,HEIGHT-826)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Marauder"
+    local buttonPos = vec2(25,HEIGHT-852)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+
+    local shipClass = "Carrier"
+    local buttonPos = vec2(207,HEIGHT-852)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Supercarrier"
+    local buttonPos = vec2(389,HEIGHT-852)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local shipClass = "Dreadnought"
+    local buttonPos = vec2(571,HEIGHT-852)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    --
+    local shipClass = "Titan"
+    local buttonPos = vec2(25,HEIGHT-878)
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local buttonPos = vec2(207,HEIGHT-878)
+    local shipClass = "POS Modules"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    local shipClass = "POS Large"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    local shipClass = "POS Medium"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    local shipClass = "POS Small"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    
+    local buttonPos = vec2(389,HEIGHT-878)
+    local shipClass = "Infrastructure Modules"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    local shipClass = "Territory Modules"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
+    local shipClass = "Customs Offices"
+    KMFilterHandleShipClassButton(shipClass,buttonPos,touch)
 end
             
