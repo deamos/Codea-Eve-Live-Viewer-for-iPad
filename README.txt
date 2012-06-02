@@ -1,4 +1,4 @@
-Eve Live Viewer 0.68a
+Eve Live Viewer 0.69a
 Author: David Lockwood
 ----------------------------------
 Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
@@ -19,13 +19,16 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v0.68a:
+Known Issues v0.69a:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
+-v0.69a(6/2/2012)
+--Filtering by Ship Class Type is now in.
+
 -v0.68a(6/1/2012)
 --ISK Filtering is now in.
 --Behind the scene tweaks to keep from crossing the streams
@@ -52,5 +55,5 @@ Version History:
 
 To Do:
 -------------
--Allow Filtering by Ship Type and ISK Value
 -Incorporate evemaps.dotlan.net XML Data for System Stats and Notifications
+-Incorporate Eve-Central's new Route Planning to create filtering by Route
