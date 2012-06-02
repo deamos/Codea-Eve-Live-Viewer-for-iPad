@@ -93,6 +93,8 @@ function loadSavedData()
     splitAndRestoreKMFilters()
     kmFiltersRegionToggle = readLocalData("kmFiltersRegionToggle",kmFiltersRegionToggle)
     infoBar = readLocalData("infoBar",infoBar)
+    KMFilterIsk = readLocalData("KMFilterIsk",KMFilterIsk)
+    
 end
 
 function saveSettings()
@@ -115,6 +117,7 @@ function saveSettings()
     splitAndSaveKMFilters()
     saveLocalData("kmFiltersRegionToggle",kmFiltersRegionToggle)
     saveLocalData("infoBar",infoBar)
+    saveLocalData("KMFilterIsk",KMFilterIsk)
 end
 
 function openSettings()

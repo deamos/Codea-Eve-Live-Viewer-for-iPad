@@ -1,6 +1,4 @@
 function setDefaultValues()
-version = "0.67a"
-database = "Escalation"
 
 screen = "MAP"
 
@@ -59,6 +57,7 @@ notificationTime = 15
 kmFiltersToggle = false
 kmFiltersList={}
 kmFiltersRegionToggle = false
+KMFilterIsk = 0
 
 end
 

@@ -16,7 +16,9 @@ function handleMainTouch(touch)
     handleZoomButtons(touch)
     handleOpenSettingsButton(touch)
     handleStarsLinesToggle(touch)
-    handleStarLinesButtons(touch)
+    if mapStarLinesToggle == true then
+        handleStarLinesButtons(touch)
+    end
     handleInfoBarToggle(touch)
     
     handleForceRedownload(touch)

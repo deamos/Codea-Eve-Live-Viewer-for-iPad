@@ -2,6 +2,7 @@ function KMFilterHandleTouches(touch)
     KMFilterHandleExit(touch)
     KMFilterHandleRegionToggle(touch)
     KMFilterHandleRegionButtons(touch)
+    KMFilterHandleISKButtons(touch)
 end
 
 function KMFilterHandleExit(touch)
@@ -325,3 +326,47 @@ function KMFilterHandleRegionButtons(touch)
     KMFilterHandleRegionButton(region,buttonPos,touch)
     ----
 end
+
+function KMFilterHandleISKButtons(touch)
+ 
+    if touch.x >= 140 and touch.x <= 140+24 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-560 and touch.y <= HEIGHT-546 then
+            KMFilterIsk = 0
+            sound(SOUND_PICKUP, 26808)
+            return
+        end
+    end
+    
+    if touch.x >= 25 and touch.x <= 25+180 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-590 and touch.y <= HEIGHT-590+24 then
+            KMFilterIsk = 1000000000
+            sound(SOUND_PICKUP, 26808)
+            return
+        end
+    end
+    
+    if touch.x >= 207 and touch.x <= 207+180 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-590 and touch.y <= HEIGHT-590+24 then
+            KMFilterIsk = 2000000000
+            sound(SOUND_PICKUP, 26808)
+            return
+        end
+    end
+    
+    if touch.x >= 389 and touch.x <= 389+180 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-590 and touch.y <= HEIGHT-590+24 then
+            KMFilterIsk = 5000000000
+            sound(SOUND_PICKUP, 26808)
+            return
+        end
+    end
+    
+    if touch.x >= 571 and touch.x <= 571+180 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-590 and touch.y <= HEIGHT-590+24 then
+            KMFilterIsk = 10000000000
+            sound(SOUND_PICKUP, 26808)
+            return
+        end
+    end
+end
+            

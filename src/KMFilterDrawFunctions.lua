@@ -3,6 +3,7 @@ function drawKMFiltersScreen()
     drawKMFiltersExitButton()
     drawKMFiltersRegionButtons()
     drawKMFilterRegionToggle()
+    drawKMFilterIskButtons()
     
 end
 
@@ -361,4 +362,103 @@ function drawKMFiltersRegionButtons()
     drawKMFilterRegion(region, buttonPos)
     ----
 end
+
+function drawKMFilterIskButtons()
+    pushStyle()
+    fill(255, 255, 255, 255)
+    font("AmericanTypewriter")
+    fontSize(22)
+    textMode(CORNER)
+    textAlign(LEFT)
+    text("ISK Worth",25, HEIGHT-560)
+    popStyle()
+    
+    pushStyle()
+    local txt = nil
+    
+    local pos = vec2(140,HEIGHT-560)
+    if KMFilterIsk ~= 0 then
+        fill(20, 72, 181, 255)
+        txt = "On"
+    else
+        fill(31, 29, 64, 255)
+        txt = "Off"
+    end
+    rect(pos.x,pos.y,48,28)
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(txt,pos.x+24,pos.y+14)
+    popStyle()
+    
+    pushStyle()
+    local txt = "1+ Billion ISK"
+    local buttonPos = vec2(25,HEIGHT-590)
+    
+    if KMFilterIsk == 1000000000 then
+        fill(20, 72, 181, 255)
+    else
+        fill(31, 29, 64, 255)
+    end
+    rect(buttonPos.x,buttonPos.y,180,24)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(txt,buttonPos.x+90,buttonPos.y+12)
+    popStyle()
+    
+    pushStyle()
+    local txt = "2+ Billion ISK"
+    local buttonPos = vec2(207,HEIGHT-590)
+    
+    if KMFilterIsk == 2000000000 then
+        fill(20, 72, 181, 255)
+    else
+        fill(31, 29, 64, 255)
+    end
+    rect(buttonPos.x,buttonPos.y,180,24)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(txt,buttonPos.x+90,buttonPos.y+12)
+    popStyle()
+    
+    pushStyle()
+    local txt = "5+ Billion ISK"
+    local buttonPos = vec2(389,HEIGHT-590)
+    
+    if KMFilterIsk == 5000000000 then
+        fill(20, 72, 181, 255)
+    else
+        fill(31, 29, 64, 255)
+    end
+    rect(buttonPos.x,buttonPos.y,180,24)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(txt,buttonPos.x+90,buttonPos.y+12)
+    popStyle()
+    
+    pushStyle()
+    local txt = "10+ Billion ISK"
+    local buttonPos = vec2(571,HEIGHT-590)
+    
+    if KMFilterIsk == 10000000000 then
+        fill(20, 72, 181, 255)
+    else
+        fill(31, 29, 64, 255)
+    end
+    rect(buttonPos.x,buttonPos.y,180,24)
+    
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text(txt,buttonPos.x+90,buttonPos.y+12)
+    popStyle()
+end
+
+
 

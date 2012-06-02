@@ -3,6 +3,7 @@ function drawlines()
         return
     end
     pushStyle()
+    
     for i,v in ipairs(solarSystemJumps) do
         
         local sourceSystem = v[2]
@@ -23,6 +24,7 @@ function drawlines()
         
         if (sourceX > 0 and sourceX < WIDTH) or (destX > 0 and destX < WIDTH) then
             if (sourceY > 0 and sourceY < HEIGHT) or (destY > 0 and destY < HEIGHT) then
+                
                 strokeWidth(2)
                 pushStyle()
                 if sourceRegion ~= destRegion then
@@ -30,18 +32,20 @@ function drawlines()
                 elseif sourceRegion == destRegion then
                     stroke(15, 53, 239, 237)
                 end
+                
                 if showEmpire == true then
                     if showNull == true then
-                        if linesByRegion == false and linesBySystem == false and linesByNone == false then
+                        if linesByRegion == false and linesBySystem == false then
                             line(sourceX,sourceY,destX,destY)
                         elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
                             line(sourceX,sourceY,destX,destY)
                         elseif linesBySystem == true and (sourceSystem == systemSelected or destSystem == systemSelected) then
                             line(sourceX,sourceY,destX,destY)
                         end
+                        
                     elseif showNull == false then
                         if sourceSecStatus > 0.00 and destSecStatus > 0.00 then
-                            if linesByRegion == false and linesBySystem == false and linesByNone == false then
+                            if linesByRegion == false and linesBySystem == false then
                                 line(sourceX,sourceY,destX,destY)
                             elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
                                 line(sourceX,sourceY,destX,destY)
@@ -50,10 +54,11 @@ function drawlines()
                             end
                         end
                     end
+                    
                 elseif showEmpire == false then
                     if showNull == true then
                         if sourceSecStatus <= 0.00 and destSecStatus <= 0.00 then
-                            if linesByRegion == false and linesBySystem == false and linesByNone == false then
+                            if linesByRegion == false and linesBySystem == false then
                                 line(sourceX,sourceY,destX,destY)
                             elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
                                 line(sourceX,sourceY,destX,destY)
@@ -277,6 +282,9 @@ function drawRefreshTimer()
     fontSize(16)
     textMode(CORNER)
     textAlign(LEFT)
+    if timeUntilSec < 10 then
+        timeUntilSec = "0" .. timeUntilSec
+    end
     text(math.floor(timeUntilMin)..":"..timeUntilSec,WIDTH-190,HEIGHT*.95+8)
     sprite("Eve Live View:105_32_7",WIDTH-190+50,HEIGHT*.95+18)
 end

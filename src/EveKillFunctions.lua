@@ -22,6 +22,9 @@ function didGetEveKillData(data,status,headers)
         
         local victimID = eveKillData[i]["victimExternalID"]
         
+        local victimShipClass = eveKillData[i]["victimShipClass"]
+        victimShipClass = stripQuotes(victimShipClass)
+        
         local victimCorpName = eveKillData[i]["victimCorpName"]
         victimCorpName = stripQuotes(victimCorpName)
         

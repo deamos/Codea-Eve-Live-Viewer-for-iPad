@@ -71,12 +71,16 @@ function Notification:draw()
     local regionName = nil
     local secStatus = nil
     local sysID = nil
+    local iskValue = nil
+    local victimShipClass = nil
     
     if self.type == "Kill" then
         systemName = self.parameters[2]
         regionName = regions[solarSystems[sysNameToId(systemName)][1]]
         secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
         sysID = sysNameToId(systemName)
+        iskValue = tonumber(self.parameters[14])
+        victimShipClass = self.parameters[15]
 
         xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
         yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
@@ -90,23 +94,35 @@ function Notification:draw()
             self:handleNotificationTimer()
             self:drawBeacon(xval,yval)
             self:drawBox()
+            --self:drawSysIndicator()
             self:drawKill(systemName,regionName,secStatus)
         elseif kmFiltersToggle == true then
             if kmFiltersRegionToggle == true then
-                for i,n in ipairs(kmFiltersList) do
-                    if n == regionName then
-                        self:handleNotificationTimer()
-                        self:drawBeacon(xval,yval)
-                        self:drawBox()
-                        self:drawKill(systemName,regionName,secStatus)
+                if iskValue >= KMFilterIsk then
+                    for i,n in ipairs(kmFiltersList) do
+                        if n == regionName then
+                            self:handleNotificationTimer()
+                            self:drawBeacon(xval,yval)
+                            self:drawBox()
+                            --self:drawSysIndicator()
+                            self:drawKill(systemName,regionName,secStatus)
+                        end
                     end
-                end           
-            else
+                end
+            elseif iskValue >= KMFilterIsk then
                 self:handleNotificationTimer()
                 self:drawBeacon(xval,yval)
                 self:drawBox()
+                --self:drawSysIndicator()
                 self:drawKill(systemName,regionName,secStatus)
-            end
+            end             
+        elseif iskValue >= KMFilterIsk then
+            self:handleNotificationTimer()
+            self:drawBeacon(xval,yval)
+            self:drawBox()
+            --self:drawSysIndicator()
+            self:drawKill(systemName,regionName,secStatus)
+        
         else
             self.finished = true
         end
@@ -390,3 +406,21 @@ function Notification:handleNotificationTimer()
         self.displayed = true
     end
 end
+
+function Notification:drawSysIndicator()
+    if self.type == "Kill" then
+        local systemName = self.parameters[2]
+        local regionName = regions[solarSystems[sysNameToId(systemName)][1]]
+        local secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
+        local sysID = sysNameToId(systemName)
+
+        local xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
+        local yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
+    
+        pushStyle()
+        sprite("Eve Live View:38_16_208",xval-8,yval+10)
+        popStyle()
+    end
+end
+    
+    

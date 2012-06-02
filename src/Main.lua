@@ -1,13 +1,14 @@
 supportedOrientations(PORTRAIT_ANY)
 -- Use this function to perform your initial setup
 function setup()
+    version = "0.68a"
+    database = "Inferno"
     saveProjectInfo("Author", "David Lockwood")
-    saveProjectInfo("Description", "Eve Online Real-Time Killmail Display")
+    saveProjectInfo("Description", "Eve Online Real-Time Killmail Display\nVersion:"..version.."\nWritten by Dave Lockwood")
     
     setInstructionLimit(0)
     --displayMode(FULLSCREEN_NO_BUTTONS)
     displayMode(FULLSCREEN)
-    backingMode(STANDARD)
     
     setDefaultValues()
     loadSavedData()
@@ -37,7 +38,7 @@ function draw()
         
         tick()          
     
-        if linesByNone == false or drawLines == true then
+        if linesByNone == false then --or drawLines == true then
             drawlines()
         end
         
