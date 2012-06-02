@@ -19,14 +19,20 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v0.67a:
+Known Issues v0.68a:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
--v0.67a ()
+-v0.68a()
+--ISK Filtering is now in.
+--Behind the scene tweaks to keep from crossing the streams
+--Corrected a problem with the Stars and Lines Toggle allowing you to click options without the toggle menu open
+--Starting backend integration for adding Ship Category Filtering (IE: Filter by Capital Ships, Freighters, etc)
+
+-v0.67a (5/30/2012)
 --Fixed ISK value bugs
 --Integrated ISK Values in to Notifications
 --Added Various Missing TypeIDs
