@@ -1,4 +1,4 @@
-Eve Live Viewer 0.67a
+Eve Live Viewer 0.68a
 Author: David Lockwood
 ----------------------------------
 Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
@@ -26,7 +26,7 @@ Known Issues v0.68a:
 
 Version History:
 -------------
--v0.68a()
+-v0.68a(6/1/2012)
 --ISK Filtering is now in.
 --Behind the scene tweaks to keep from crossing the streams
 --Corrected a problem with the Stars and Lines Toggle allowing you to click options without the toggle menu open
