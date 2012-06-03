@@ -1,4 +1,4 @@
-Eve Live Viewer 0.69a
+Eve Live Viewer 1.0
 Author: David Lockwood
 ----------------------------------
 Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
@@ -19,13 +19,17 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v0.69a:
+Known Issues v1.0:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
+-v1.0(6/3/2012)
+--Updated to Release Code
+--Updated Settings Text
+
 -v0.69a(6/2/2012)
 --Filtering by Ship Class Type is now in.
 
