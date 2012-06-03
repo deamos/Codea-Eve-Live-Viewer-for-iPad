@@ -216,9 +216,7 @@ function drawSettingsCredits()
     textMode(CENTER)
     textAlign(CENTER)
     textWrapWidth(275)
-    text("This app was designed by Dave Lockwood. Any included images,data, or Intellectual Property pertaining to Eve Online are the property of CCP Games. \n\nThis App is currently in beta.  please notify Deamos in-game if you have any problems.",WIDTH/2,HEIGHT/2-150)
-    
-    sprite("Eve Live View:46_128_1",WIDTH/2,200)
+    text("This app was designed by Dave Lockwood. Any included images,data, or Intellectual Property pertaining to Eve Online are the property of CCP Games. \n\nSupport Email: eveliveviewer@divby0.net\n\nSupport Website:\nhttp://divby0.net/?cat=40",WIDTH/2,HEIGHT/2-200)
     
     popStyle()
 end

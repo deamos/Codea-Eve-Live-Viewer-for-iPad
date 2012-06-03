@@ -1,7 +1,7 @@
 supportedOrientations(PORTRAIT_ANY)
 -- Use this function to perform your initial setup
 function setup()
-    version = "0.69a"
+    version = "1.0"
     database = "Inferno"
     saveProjectInfo("Author", "David Lockwood")
     saveProjectInfo("Description", "Eve Online Real-Time Killmail Display\nVersion:"..version.."\nWritten by Dave Lockwood")

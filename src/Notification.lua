@@ -228,6 +228,13 @@ function Notification:drawKill(systemName,regionName,secStatus)
     sprite("Eve Live View:84_64_15",WIDTH-37,114)
     popStyle()
     
+    pushStyle()
+    strokeWidth(2)
+    stroke(255, 255, 255, 255)
+    lineCapMode(ROUND)
+    line(0,75,WIDTH,75)
+    popStyle()
+    
     
     fill(255, 255, 255, 255)
     font("AmericanTypewriter-Bold")
@@ -400,7 +407,22 @@ function Notification:drawCommError()
     fill(255, 109, 0, 255)
     font("Optima-ExtraBlack")
     textMode(CENTER)
-    text("*** Communications Error ***",WIDTH/2,140)
+    text("*** Error ***",WIDTH/2,140)
+    fill(255, 255, 255, 255)
+    textMode(CORNER)
+    textAlign(LEFT)
+    text("Unable to retrieve data from Eve-Kill",85,85)
+    fontSize(16)
+    font("AmericanTypewriter")
+    text("Details: " ..self.parameters,10,28)
+    popStyle()
+    
+    pushStyle()
+    strokeWidth(2)
+    stroke(255, 255, 255, 255)
+    lineCapMode(ROUND)
+    line(0,75,WIDTH,75)
+    popStyle()
     
 end
     
@@ -412,11 +434,6 @@ function Notification:drawBox()
     strokeWidth(2)
     rect(0,0,WIDTH,150)
     popStyle()
-    
-    strokeWidth(2)
-    stroke(255, 255, 255, 255)
-    lineCapMode(ROUND)
-    line(0,75,WIDTH,75)
 end
 
 function Notification:drawBeacon(xval,yval)
