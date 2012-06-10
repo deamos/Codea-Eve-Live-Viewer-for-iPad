@@ -31,11 +31,14 @@ lastKey = nil
 
 sysBar = false
 sysBarName = nil
+lastSys = ""
+
 
 searchBoxYMulti = 30
 
 totalNotifications = 0
 totalKillNotifications = 0
+totalDotlanNotifications = 0
 totalISK = 0
 
 appTimer = os.clock()
@@ -47,10 +50,19 @@ shipImageID = nil
 charImage = nil
 charImageID = nil
 
+sysAlliance = nil
+sysAllianceImg = nil
+
+sysDotlanData = nil
+gettingSysData = false
 --Settings
 
 gotoEvent = true
+gotoRadar = false
+
 killNotifications = true
+dotlanNotifications = true
+dotlanRadarTracking = false
 
 notificationTime = 15
 

@@ -5,7 +5,8 @@ function drawSettings()
     drawSettingsGotoEventToggle()
     drawSettingsNotificationTypeSelection()
     drawSettingsNotificationTimeSelection()
-    drawSettingsKMFilterButton()
+    drawSettingsFilterButton()
+    drawDotlanRadarSettings()
     drawSettingsReset()
     drawSettingsResetImgCache()
     drawSettingsCredits()
@@ -17,7 +18,7 @@ function drawSettingsTitle()
         font("Futura-CondensedExtraBold")
         fontSize(30)
         fill(255, 255, 255, 255)
-        text("Eve Live Settings",WIDTH/2,HEIGHT-20)
+        text("Eve Live Viewer Settings",WIDTH/2,HEIGHT-20)
     popStyle()
 end
 
@@ -36,7 +37,7 @@ function drawSettingsGotoEventToggle()
     font("AmericanTypewriter")
     fontSize(16)
     fill(255, 255, 255, 255)
-    text("Go To Events",141,HEIGHT-90)
+    text("Go To...",141,HEIGHT-90)
     strokeWidth(2)
     if gotoEvent == false then
         fill(31, 29, 64, 255)
@@ -44,14 +45,22 @@ function drawSettingsGotoEventToggle()
         fill(20, 72, 181, 255)
     end
     stroke(61, 61, 61, 255)
-    rect(110,HEIGHT-140,64,32)
+    rect(70,HEIGHT-140,64,32)
     
     fill(255, 255, 255, 255)
-    if gotoEvent == false then
-        text("Off",110+32,HEIGHT-140+16)
-    elseif gotoEvent == true then
-        text("On",110+32,HEIGHT-140+16)
+    text("Events",70+32,HEIGHT-140+16)
+    
+    if gotoRadar == false then
+        fill(31, 29, 64, 255)
+    elseif gotoRadar == true then
+        fill(20, 72, 181, 255)
     end
+    stroke(61, 61, 61, 255)
+    rect(140,HEIGHT-140,64,32)
+    
+    fill(255, 255, 255, 255)
+    text("Radar",140+32,HEIGHT-140+16)
+    
     popStyle()
 end
 
@@ -69,10 +78,19 @@ function drawSettingsNotificationTypeSelection()
         fill(20, 72, 181, 255)
     end
     stroke(61, 61, 61, 255)
-    rect(100,HEIGHT-230,84,32)
+    rect(50,HEIGHT-230,84,32)
+    
+    if dotlanNotifications == false then
+        fill(31, 29, 64, 255)
+    elseif dotlanNotifications == true then
+        fill(20, 72, 181, 255)
+    end
+    stroke(61, 61, 61, 255)
+    rect(141,HEIGHT-230,84,32)
     
     fill(255, 255, 255, 255)
-    text("Kill Mails",110+32,HEIGHT-230+16)
+    text("Kill Mails",60+32,HEIGHT-230+16)
+    text("Dotlan",151+32,HEIGHT-230+16)
     
 end
 
@@ -117,12 +135,13 @@ function drawSettingsNotificationTimeSelection()
     popStyle()
 end
 
-function drawSettingsKMFilterButton()
+function drawSettingsFilterButton()
     pushStyle()
     font("AmericanTypewriter")
     fontSize(16)
     fill(255, 255, 255, 255)
-    text("Kill Mail Filters",141,HEIGHT-350)
+    text("Filters",141,HEIGHT-350)
+    text("Kills", 35,HEIGHT-385)
     if kmFiltersToggle == false then
         fill(31, 29, 64, 255)
     elseif kmFiltersToggle == true then
@@ -143,6 +162,7 @@ function drawSettingsKMFilterButton()
     rect(128,HEIGHT-400,84,32)
     fill(255, 255, 255, 255)
     text("Filters",128+42,HEIGHT-384)
+    
     popStyle()
 end
 
@@ -179,6 +199,53 @@ function drawSettingsResetImgCache()
     text("Reset",WIDTH-118,HEIGHT-210+16)
     
 end
+
+function drawDotlanRadarSettings()
+    
+    pushStyle()
+    font("AmericanTypewriter")
+    fontSize(16)
+    fill(255, 255, 255, 255)
+    text("Dotlan Radar",WIDTH/2,HEIGHT-90)
+    strokeWidth(2)
+    if dotlanRadarTracking == false then
+        fill(31, 29, 64, 255)
+    elseif dotlanRadarTracking == true then
+        fill(20, 72, 181, 255)
+    end
+    stroke(61, 61, 61, 255)
+    rect(WIDTH/2-42,HEIGHT-140,84,32)
+    
+    fill(255, 255, 255, 255)
+    local setting = nil
+    if dotlanRadarTracking == false then
+        setting = "Off"
+    elseif dotlanRadarTracking == true then
+        setting = "On"
+    end
+    text(setting,WIDTH/2,HEIGHT-140+16)
+    
+    text("Radar Token",WIDTH/2,HEIGHT-165)
+    if keyboardBuffer() ~= nil then
+        dotLanRadarHandle.token = keyboardBuffer()
+    end
+    text(dotLanRadarHandle.token,WIDTH/2,HEIGHT-210+16)
+    
+    if dotLanRadarHandle.active == true then
+        fill(31, 255, 0, 255)
+        text("Active",WIDTH/2,HEIGHT-222) 
+    else
+        fill(255, 0, 0, 255)
+        text("Inactive",WIDTH/2,HEIGHT-222) 
+    end
+    
+    stroke(255, 255, 255, 255)
+    strokeWidth(2)
+    fill(0, 0, 0, 0)
+    rect(WIDTH/2-128,HEIGHT-210,256,32)
+    popStyle()
+    
+end
     
 
 function drawSettingsCredits()
@@ -207,12 +274,14 @@ function drawSettingsCredits()
     text("Version: " .. version,12,HEIGHT/2-100)
     text("Data: " .. database,12,HEIGHT/2-118)
     
-    text("Kills: www.eve-kill.net",WIDTH-176,HEIGHT/2-101)
-    text("       evemaps.dotlan.net",WIDTH-185,HEIGHT/2-120)
+    text("Kills: www.eve-kill.net",WIDTH-197,HEIGHT/2-101)
+    text("       evemaps.dotlan.net",WIDTH-190,HEIGHT/2-120)
+    text("Radar: evemaps.dotlan.net",WIDTH-197,HEIGHT/2-139)
+    text("Extra: evemaps.dotlan.net",WIDTH-197,HEIGHT/2-158)
     
     text("All Notifications: " .. totalNotifications,12,HEIGHT/2-220)
     text("Kill Mails: " .. totalKillNotifications,12,HEIGHT/2-240)
-    
+    text("Dotlan Feed: " .. totalDotlanNotifications,12,HEIGHT/2-260)
     textMode(CENTER)
     textAlign(CENTER)
     textWrapWidth(275)

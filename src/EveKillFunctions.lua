@@ -1,5 +1,5 @@
 function getEveKillData()
-    date=os.date('!*t',os.time())
+    date=getNow()
     
     currentTimeFormat=date.year.."-"..date.month.."-"..date.day.."_"..(date.hour).."."..(date.min-5).."."..date.sec
     eveKill=nil

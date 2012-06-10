@@ -1,7 +1,7 @@
 supportedOrientations(PORTRAIT_ANY)
 -- Use this function to perform your initial setup
 function setup()
-    version = "1.0"
+    version = "1.1"
     database = "Inferno"
     saveProjectInfo("Author", "David Lockwood")
     saveProjectInfo("Description", "Eve Online Real-Time Killmail Display\nVersion:"..version.."\nWritten by Dave Lockwood")
@@ -14,6 +14,9 @@ function setup()
     loadSavedData()
     
     notifyHandle = NotificationHandler()
+    dotLanRSSHandle = DotlanRSS()
+    dotLanRadarHandle = DotlanRadar()
+    dotLanRadarHandle.token = readLocalData("dotLanRadarToken","")
 
 end
 
@@ -41,14 +44,20 @@ function draw()
         end
         
         drawStars()
-        drawLabel()
+       
         if mapStarLinesToggle == true then
             drawStarLinesBar()
         end
-        drawBoxes()
+        if dotlanRadarTracking == true then
+            dotLanRadarHandle:displayLocation()
+        end
+       
+       
         drawSearchBox()
     
         notifyHandle:draw()
+        drawLabel()
+        drawBoxes()
         
         drawRefreshTimer()
         
@@ -87,6 +96,9 @@ function keyboard(key)
         hideKeyboard()
         if screen == "MAP" then
             performSystemSearch()
+        elseif screen == "SETTINGS" then
+            --placeholder
+            
         end
         lastKey = RETURN
     else
@@ -99,11 +111,29 @@ function tick()
     handleSearchResults()
     saveSettings()
     
-    --Refresh Data Timer
+    --Refresh Data Timer (5 mins)
     if os.difftime(currentClock,appClock) >= 300 then
         appClock = os.clock()
         getNewData()
     end
+    
+    -- Handle Dotlan Radar (20 secs)
+    if dotlanRadarTracking == true and (dotLanRadarHandle.token == "" or dotLanRadarHandle.token == nil) then
+        dotlanRadarTracking = false
+        dotLanRadarHandle.active = false
+    end
+    
+    local dotlanDifference = os.difftime(currentClock,dotLanRadarHandle.lastChecked)
+    
+    if (dotLanRadarHandle.token ~= nil and dotlanRadarTracking == true) and (dotLanRadarHandle.lastChecked == nil or dotlanDifference >= 20) then
+        dotLanRadarHandle:getLocation()
+    end
+    
+    if dotlanRadarTracking == true then
+        dotLanRadarHandle:parseDotlanRadarData()
+    end
+    
+    dotLanRSSHandle:parseData()
     
     currentClock = os.clock()
     

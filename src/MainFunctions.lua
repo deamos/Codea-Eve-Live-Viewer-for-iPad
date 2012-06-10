@@ -16,9 +16,12 @@ end
 
 function performSystemSearch()
     local systemName = kbBuffer
+    
     for i,v in pairs(solarSystems) do
         if string.lower(solarSystems[i][2]) == string.lower(systemName) then
+
             gotoSystem(i)
+            
             return
         end
     end
@@ -77,13 +80,17 @@ end
 function loadSavedData()
     totalNotifications = readLocalData("totalNotifications",totalNotifications)
     totalKillNotifications = readLocalData("totalKillNotifications",totalKillNotifications)
+    totalDotlanNotifications = readLocalData("totalDotlanNotifications",totalDotlanNotifications)
     gotoEvent = readLocalData("gotoEvent",gotoEvent)
+    gotoRadar = readLocalData("gotoRadar",gotoRadar)
     killNotifications = readLocalData("killNotifications", killNotifications)
+    dotlanNotifications = readLocalData("dotlanNotifications", dotlanNotifications)
     showEmpire = readLocalData("showEmpire", showEmpire)
     showNull = readLocalData("showNull", showNull)
     linesByRegion = readLocalData("linesByRegion", linesByRegion)
     linesBySystem = readLocalData("linesBySystem", linesBySystem)
     linesByNone = readLocalData("linesByNone", linesByNone)
+    dotlanRadarTracking = readLocalData("dotlanRadarTracking", dotlanRadarTracking)
     xscale = readLocalData("xscale", xscale)
     yscale = readLocalData("yscale", yscale)
     x = readLocalData("x",x)
@@ -95,6 +102,7 @@ function loadSavedData()
     infoBar = readLocalData("infoBar",infoBar)
     KMFilterIsk = readLocalData("KMFilterIsk",KMFilterIsk)
     kmFiltersShipClassToggle = readLocalData("kmFiltersShipClassToggle",kmFiltersShipClassToggle)
+   
     
 end
 
@@ -102,8 +110,11 @@ function saveSettings()
     
     saveLocalData("totalNotifications",totalNotifications)
     saveLocalData("totalKillNotifications",totalKillNotifications)
+    saveLocalData("totalDotlanNotifications",totalDotlanNotifications)
     saveLocalData("gotoEvent",gotoEvent)
+    saveLocalData("gotoRadar",gotoRadar)
     saveLocalData("killNotifications", killNotifications)
+    saveLocalData("dotlanNotifications", dotlanNotifications)
     saveLocalData("showEmpire", showEmpire)
     saveLocalData("showNull", showNull)
     saveLocalData("linesByRegion", linesByRegion)
@@ -120,6 +131,8 @@ function saveSettings()
     saveLocalData("infoBar",infoBar)
     saveLocalData("KMFilterIsk",KMFilterIsk)
     saveLocalData("kmFiltersShipClassToggle",kmFiltersShipClassToggle)
+    saveLocalData("dotlanRadarTracking",dotlanRadarTracking)
+    saveLocalData("dotLanRadarToken",dotLanRadarHandle.token)
 end
 
 function openSettings()
@@ -144,5 +157,41 @@ function splitAndRestoreKMFilters()
         end
     end
 end
+
+function getSysData(systemName)
+    local url = "http://evemaps.dotlan.net/system/"..systemName.."/kills"
+    sysAlliance = nil
+    http.get(url,gotSysInfo)
+end
+
+function gotSysInfo(data,status,headers)
+    sysDotlanData = data
+end
+
+function handleSysDotlanData()
+
+    sysAlliance = string.match(sysDotlanData,'/alliance/[%a%p]+"')
+    
+    if sysAlliance ~= nil then
+        sysAlliance = string.sub(sysAlliance,11,string.len(sysAlliance)-1)
+        sysAlliance = string.gsub(sysAlliance,"_"," ")
+        local sysAllianceURL = string.match(sysDotlanData,'http://e.dotlan.net/images/Alliance/[%d]+_128.png')
+    
+        getSysAllianceImg(sysAllianceURL)
+    end
+    
+    
+    
+    sysDotlanData = nil
+    
+    return sysAlliance
+end
+
+function gotSysAllianceImage(data,status,header)
+    sysAllianceImg = data
+end
+    
+    
+    
         
     

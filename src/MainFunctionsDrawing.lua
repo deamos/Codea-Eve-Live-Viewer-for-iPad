@@ -120,11 +120,25 @@ function drawLabel()
             if ((showEmpire == true and secStatus > 0) or (showNull == true and secStatus <= 0)) and infoBar == true then
                 
                 gotoSystem(i)
+                
                 local systemName = solarSystems[i][2]
                 local regionName = solarSystems[i][1]
                 
+                if lastSys ~= systemName then
+                    gettingSysData = false
+                end
+                
                 sysBar = true
                 sysBarName = systemName
+                
+                if gettingSysData == false then
+                    getSysData(systemName)
+                    gettingSysData = true
+                end
+                
+                if sysDotlanData ~= nil then
+                    handleSysDotlanData()
+                end
                 
                 pushStyle()
                 stroke(78, 78, 78, 137)
@@ -140,14 +154,25 @@ function drawLabel()
                 font("AmericanTypewriter-Bold")
                 fontSize(16)
                 fill(255, 255, 255, 255)
-                text(systemName,(WIDTH-250+(245/2)),HEIGHT-565+430)
+                text(systemName,(WIDTH-250+(245/2)),HEIGHT-565+435)
                     
-                sprite("Eve Live View:7_64_4",WIDTH-250+30,HEIGHT-565+420)
+                if sysAllianceImg ~= nil and sysAlliance ~= nil then
+                    sprite(sysAllianceImg,WIDTH-250+30,HEIGHT-565+420,56,56)
+                else
+                    sprite("Eve Live View:7_64_4",WIDTH-250+30,HEIGHT-565+420,56,56)
+                end
                     
                 fontSize(14)
                 font("AmericanTypewriter")
                 fill(249, 249, 249, 255)
-                text(regions[regionName],(WIDTH-250+(245/2)),HEIGHT-565+410)
+                text(regions[regionName],(WIDTH-250+(245/2)),HEIGHT-565+420)
+                if sysAlliance ~= nil then
+                    pushStyle()
+                    fontSize(12)
+                    text(sysAlliance,WIDTH-250+(245/2),HEIGHT-565+402)
+                    popStyle()
+                end
+                
                 lineCapMode(ROUND)
                 smooth()
                 strokeWidth(5)
@@ -189,19 +214,30 @@ function drawLabel()
                 strokeWidth(2)
                 rect(WIDTH-85+8,HEIGHT-565+7,66,67)
                 sprite("Eve Live View:95_64_10",WIDTH-85+40,HEIGHT-565+40)
+                
             end
             popStyle()
                 
             systemSelected = i
             regionSelected = solarSystems[i][1]
+            
+            lastSys = solarSystems[i][2]
 
             return
+        else
+
         end
+    
     systemSelected = nil
     regionSelected = nil
     sysBar = false
     sysBarName = nil
     end
+    
+    gettingSysData = false
+    sysDotlanData = nil
+    sysAlliance = nil
+    sysAllianceImg = nil
 end
 
 function drawBoxes()

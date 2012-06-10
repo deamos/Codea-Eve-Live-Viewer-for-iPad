@@ -28,6 +28,19 @@ function didGetCharImage(data,status,headers)
     charImage = data
 end
 
+function getSysAllianceImg(sysAllianceURL)
+    if sysAllianceURL ~= nil then
+        local num = string.sub(sysAllianceURL,37,string.len(sysAllianceURL)-4)
+        
+        if readImage("Documents:EveLive - Alliance -"..num) == nil then
+            http.get(sysAllianceURL,gotSysAllianceImage)
+            cacheImage("EveLive - Alliance -"..num,sysAllianceImg)
+        else 
+            sysAllianceImg = readImage("Documents:EveLive - Alliance -"..num)
+        end
+    end
+end
+
 function cacheImage(imgName,img)
     local name = "Documents:"..imgName
     saveImage("Documents:"..imgName,img)

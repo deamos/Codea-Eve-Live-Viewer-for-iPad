@@ -5,17 +5,31 @@ function handleSettingsTouch(touch,state)
             screen = "MAP"
         end
     
-    elseif touch.x >= 110 and touch.x <= 110+64 and touch.state == BEGAN then
+    elseif touch.x >= 70 and touch.x <= 70+64 and touch.state == BEGAN then
         if touch.y >= HEIGHT-140 and touch.y <= HEIGHT-140 + 32 then
             gotoEvent = not gotoEvent
+            gotoRadar = false
+            sound(SOUND_PICKUP, 26808)
+        end
+        
+    elseif touch.x >= 140 and touch.x <= 140+64 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-140 and touch.y <= HEIGHT-140 + 32 then
+            gotoEvent = false
+            gotoRadar = not gotoRadar
             sound(SOUND_PICKUP, 26808)
         end
     end
     
     --Problem with touch.state again here    
-    if touch.x >= 100 and touch.x <= 100+84 and touch.state == BEGAN then
+    if touch.x >= 50 and touch.x <= 50+84 and touch.state == BEGAN then
         if touch.y >= HEIGHT-230 and touch.y <= HEIGHT-230 + 32 then
             killNotifications = not killNotifications
+            sound(SOUND_PICKUP, 26808)
+        end 
+        
+    elseif touch.x >= 141 and touch.x <= 141+84 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-230 and touch.y <= HEIGHT-230 + 32 then
+            dotlanNotifications = not dotlanNotifications
             sound(SOUND_PICKUP, 26808)
         end 
         
@@ -69,4 +83,18 @@ function handleSettingsTouch(touch,state)
             sound(SOUND_PICKUP, 26808)
         end
     end
+    
+    if touch.x >= WIDTH/2-42 and touch.x <= WIDTH/2-42+84 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-140 and touch.y <= HEIGHT-140+32 then
+            dotlanRadarTracking = not dotlanRadarTracking
+            sound(SOUND_PICKUP, 26808)
+        end
+        rect(WIDTH/2-128,HEIGHT-210,256,32)
+    elseif touch.x >= WIDTH/2-128 and touch.x <= WIDTH/2-128+256 and touch.state == BEGAN then
+        if touch.y >= HEIGHT-210 and touch.y <= HEIGHT-210+32 then
+            showKeyboard()
+            sound(SOUND_PICKUP, 26808)
+        end
+    end
+    
 end

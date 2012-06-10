@@ -22,6 +22,7 @@ end
 function NotificationHandler:draw()
     if table.maxn(self.list) >= 1 then
         if self.list[1].finished == false then
+            --Handler for Kill Notifications
             if killNotifications == true and (self.list[1].type == "Kill") then
                 local systemName = self.list[1].parameters[2]
                 local secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
@@ -31,9 +32,17 @@ function NotificationHandler:draw()
                     self.list[1]:draw()
                     self.active = true
                 end
+            --Handler for Comm Error Notifications
             elseif self.list[1].type == "CommError" then
                 self.list[1]:draw()
                 self.active = true
+             
+            elseif self.list[1].type == "dotLanRSS" then
+                totalDotlanNotifications = totalDotlanNotifications + 1
+                self.list[1]:draw()  
+                --print("drawing")
+                self.active = true
+                
             end
         elseif self.list[1].finished == true then
             self:pop()
@@ -84,12 +93,7 @@ function Notification:draw()
 
         xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
         yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
-    end
     
-    
-
-    
-    if self.type == "Kill" then
         if kmFiltersToggle == false then
             self:handleNotificationTimer()
             self:drawBeacon(xval,yval)
@@ -163,6 +167,22 @@ function Notification:draw()
         self:handleNotificationTimer()
         self:drawBox()
         self:drawCommError()
+        
+    elseif self.type == "dotLanRSS" and dotlanNotifications == true then
+        if self.parameters[5] ~= nil then
+            local sysID = sysNameToId(self.parameters[5])
+            xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
+            yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
+            self:drawBeacon(xval,yval)
+        end
+        
+        self:handleNotificationTimer()
+        self:drawHalfBox()
+        self:drawDotLanRSS()
+        
+    else
+        self.finished = true
+        
     end
 
     
@@ -175,13 +195,14 @@ end
 
 function Notification:touched(touch)
     -- Codea does not automatically call this method
-    if touch.x >= WIDTH-70 and touch.x <= WIDTH-70+64 and touch.state ==BEGAN then
+    if touch.x >= WIDTH-70 and touch.x <= WIDTH-70+64 and touch.state ==BEGAN and self.type == "Kill" then
         if touch.y >= 82 and touch.y <= 82+64 then
             local killID = self.parameters[13]
             local url = "http://eve-kill.net/?a=kill_detail&kll_id="..killID
             
             openURL(url)
         end
+    
     end
 end
 
@@ -209,8 +230,8 @@ function Notification:drawKill(systemName,regionName,secStatus)
     text("*** DED Alert - ".. timestamp .. " *** ",WIDTH/2,140)
             
     if self.moved == false and gotoEvent == true then
-        xscale = 13.79
-        yscale = 13.69
+        --xscale = 13.79
+        --yscale = 13.69
         kbBuffer = self.parameters[2]
         performSystemSearch()
         self.moved = true
@@ -425,6 +446,37 @@ function Notification:drawCommError()
     popStyle()
     
 end
+
+function Notification:drawDotLanRSS()
+    local rssTime = self.parameters[3]
+    local timeDisplay = rssTime["year"] .. "-" .. rssTime["month"] .. "-" .. rssTime["day"] .. " " .. rssTime["hour"].. ":" .. rssTime["min"] .. ":" .. rssTime["sec"]
+    
+    if self.moved == false and gotoEvent == true and self.parameters[5] ~= nil then
+        --xscale = 13.79
+        --yscale = 13.69
+        kbBuffer = self.parameters[5]
+        performSystemSearch()
+        self.moved = true
+    end
+    
+    pushStyle()
+    sprite("Eve Live View:52_64_9",35,34,64,64)
+    
+    fill(255, 109, 0, 255)
+    font("Optima-ExtraBlack")
+    textMode(CENTER)
+    text(self.parameters[2] .. " - ".. timeDisplay,WIDTH/2,60)
+    fill(255, 255, 255, 255)
+    font("AmericanTypewriter-Bold")
+    fontSize(14)
+    textMode(CORNER)
+    textAlign(LEFT)
+    textWrapWidth(600)
+    text(self.parameters[1],85,21)
+    sprite("Eve Live View:7_64_5",WIDTH-35,34,64,64)
+    popStyle()
+    
+end
     
 
 function Notification:drawBox()
@@ -433,6 +485,15 @@ function Notification:drawBox()
     stroke(255, 255, 255, 188)
     strokeWidth(2)
     rect(0,0,WIDTH,150)
+    popStyle()
+end
+
+function Notification:drawHalfBox()
+    pushStyle()
+    fill(33, 33, 33, 255)
+    stroke(255, 255, 255, 188)
+    strokeWidth(2)
+    rect(0,0,WIDTH,75)
     popStyle()
 end
 
