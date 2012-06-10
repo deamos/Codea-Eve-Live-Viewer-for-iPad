@@ -1,4 +1,4 @@
-Eve Live Viewer 1.0
+Eve Live Viewer 1.1
 Author: David Lockwood
 ----------------------------------
 Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
@@ -19,13 +19,19 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v1.0:
+Known Issues v1.1:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
+-v1.1(6/10/2012)
+--Incorporated Dotlan Faction Warfare,Sov,Alliance, and other Feeds to Notifications
+--Incorporated Dotlan's Radar Feature
+--Changed the "Go to Event" Setting to "Go To..." and added the ability to go to Dotlan Radar
+--Began adding Alliance Sov Status into the System Bar
+
 -v1.0(6/3/2012)
 --Updated to Release Code
 --Updated Settings Text
@@ -59,5 +65,5 @@ Version History:
 
 To Do:
 -------------
--Incorporate evemaps.dotlan.net XML Data for System Stats and Notifications
+-Incorporate evemaps.dotlan.net XML Data for System Stats
 -Incorporate Eve-Central's new Route Planning to create filtering by Route
