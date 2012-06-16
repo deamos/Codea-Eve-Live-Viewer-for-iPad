@@ -226,6 +226,13 @@ function drawDotlanRadarSettings()
     text(setting,WIDTH/2,HEIGHT-140+16)
     
     text("Radar Token",WIDTH/2,HEIGHT-165)
+    
+    pushStyle()
+    textWrapWidth(260)
+    fontSize(14)
+    text("Radar Token found at:\nhttp://evemaps.dotlan.net/radar\nfrom the Eve Online In-Game Browser",WIDTH/2,HEIGHT-265)
+    popStyle()
+    
     if keyboardBuffer() ~= nil then
         dotLanRadarHandle.token = keyboardBuffer()
     end

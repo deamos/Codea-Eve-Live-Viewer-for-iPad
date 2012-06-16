@@ -24,6 +24,7 @@
 		<string>mapSolarSystem</string>
 		<string>mapSolarSystemJumps</string>
 		<string>Notification</string>
+		<string>HistoricalNotifications</string>
 		<string>MathFunctions</string>
 		<string>SearchBox</string>
 		<string>SettingsFunctionsDrawing</string>
@@ -35,7 +36,7 @@
 	<string>2012-05-06 15:58:58 +0000</string>
 	<key>Description</key>
 	<string>Eve Online Real-Time Killmail Display
-Version:1.1
+Version:1.2
 Written by Dave Lockwood</string>
 </dict>
 </plist>

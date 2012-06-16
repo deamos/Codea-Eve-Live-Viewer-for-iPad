@@ -232,8 +232,10 @@ function Notification:drawKill(systemName,regionName,secStatus)
     if self.moved == false and gotoEvent == true then
         --xscale = 13.79
         --yscale = 13.69
-        kbBuffer = self.parameters[2]
-        performSystemSearch()
+        --kbBuffer = self.parameters[2]
+        --performSystemSearch()
+        local sysID = sysNameToId(systemName)
+        gotoSystem(sysID)
         self.moved = true
     end
     
@@ -454,8 +456,9 @@ function Notification:drawDotLanRSS()
     if self.moved == false and gotoEvent == true and self.parameters[5] ~= nil then
         --xscale = 13.79
         --yscale = 13.69
-        kbBuffer = self.parameters[5]
-        performSystemSearch()
+        local systemName = self.parameters[5]
+        local sysID = sysNameToId(systemName)
+        gotoSystem(sysID)
         self.moved = true
     end
     
@@ -484,7 +487,9 @@ function Notification:drawBox()
     fill(33, 33, 33, 255)
     stroke(255, 255, 255, 188)
     strokeWidth(2)
-    rect(0,0,WIDTH,150)
+    --rect(0,0,WIDTH,150)
+    spriteMode(CORNER)
+    sprite("Eve Live View:NotificationBG",0,0,WIDTH,150)
     popStyle()
 end
 
@@ -493,7 +498,9 @@ function Notification:drawHalfBox()
     fill(33, 33, 33, 255)
     stroke(255, 255, 255, 188)
     strokeWidth(2)
-    rect(0,0,WIDTH,75)
+    --rect(0,0,WIDTH,75)
+    spriteMode(CORNER)
+    sprite("Eve Live View:NotificationBG",0,0,WIDTH,75)
     popStyle()
 end
 

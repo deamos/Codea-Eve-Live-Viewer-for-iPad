@@ -11,8 +11,8 @@ end
 function SearchBox:draw()
     -- Codea does not automatically call this method
     pushStyle()
-    strokeWidth(2)
-    stroke(220, 220, 220, 255)
+    stroke(104, 104, 104, 130)
+    strokeWidth(1)
     fill(105, 105, 105, 198)
     rect(self.posX, self.posY, 200,30)
     fill(255, 255, 255, 255)
