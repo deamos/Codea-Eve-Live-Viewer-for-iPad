@@ -19,13 +19,21 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v1.1:
+Known Issues v1.2:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
+-v1.2(6/15/2012)
+--Cleaned up some minor code
+--Began incorporating Historical Notification Code (Not Active/working yet)
+--Changed the Notification Window Background
+--Removed some unsightly borders around some buttons on the map screen
+--Added an informational line about Dotlan's Radar functionality, as it where to get your token.
+--Changed the way Notifications were handling Go to Events. No longer uses the search bar to move.
+
 -v1.1(6/10/2012)
 --Incorporated Dotlan Faction Warfare,Sov,Alliance, and other Feeds to Notifications
 --Incorporated Dotlan's Radar Feature
