@@ -1,128 +1,19 @@
-function drawlines()
-    if drawLines == false or linesByNone == true then
-        return
-    end
-    pushStyle()
-    
-    for i,v in ipairs(solarSystemJumps) do
-        
-        local sourceSystem = v[2]
-        local sourceRegion = v[1]
-
-        local sourceSecStatus = round(solarSystems[sourceSystem][6],2)
-        
-        local sourceX = (WIDTH/2)+(solarSystems[sourceSystem][3]/(scaleValX*10^xscale))+x
-        local sourceY = (HEIGHT/2)+(solarSystems[sourceSystem][5]/(scaleValY*10^yscale))+y
-        
-        local destSystem = v[3]
-        local destRegion = v[4]
-        
-        local destSecStatus = round(solarSystems[destSystem][6],2)
-        
-        local destX = (WIDTH/2)+(solarSystems[destSystem][3]/(scaleValX*10^xscale))+x
-        local destY = (HEIGHT/2)+(solarSystems[destSystem][5]/(scaleValY*10^yscale))+y
-        
-        if (sourceX > 0 and sourceX < WIDTH) or (destX > 0 and destX < WIDTH) then
-            if (sourceY > 0 and sourceY < HEIGHT) or (destY > 0 and destY < HEIGHT) then
-                
-                strokeWidth(2)
-                pushStyle()
-                if sourceRegion ~= destRegion then
-                    stroke(255, 0, 0, 255)
-                elseif sourceRegion == destRegion then
-                    stroke(15, 53, 239, 237)
-                end
-                
-                if showEmpire == true then
-                    if showNull == true then
-                        if linesByRegion == false and linesBySystem == false then
-                            line(sourceX,sourceY,destX,destY)
-                        elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
-                            line(sourceX,sourceY,destX,destY)
-                        elseif linesBySystem == true and (sourceSystem == systemSelected or destSystem == systemSelected) then
-                            line(sourceX,sourceY,destX,destY)
-                        end
-                        
-                    elseif showNull == false then
-                        if sourceSecStatus > 0.00 and destSecStatus > 0.00 then
-                            if linesByRegion == false and linesBySystem == false then
-                                line(sourceX,sourceY,destX,destY)
-                            elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
-                                line(sourceX,sourceY,destX,destY)
-                            elseif linesBySystem == true and (sourceSystem == systemSelected or destSystem == systemSelected) then
-                                line(sourceX,sourceY,destX,destY)
-                            end
-                        end
-                    end
-                    
-                elseif showEmpire == false then
-                    if showNull == true then
-                        if sourceSecStatus <= 0.00 and destSecStatus <= 0.00 then
-                            if linesByRegion == false and linesBySystem == false then
-                                line(sourceX,sourceY,destX,destY)
-                            elseif linesByRegion == true and (sourceRegion == regionSelected or destRegion == regionSelected) then
-                                line(sourceX,sourceY,destX,destY)
-                            elseif linesBySystem == true and (sourceSystem == systemSelected or destSystem == systemSelected) then
-                                line(sourceX,sourceY,destX,destY)
-                            end
-                        end
-                    end
-                end
-                            
-                popStyle()
-            end
-        end
-        
-    popStyle()
-        
-    end
-end
-
-function drawStars()
-    pushStyle()
-    fill(255, 255, 255, 255)
-    for i,v in pairs(solarSystems) do
-
-        local secStatus = round(solarSystems[i][6],2)
-
-        local xval = (WIDTH/2)+(solarSystems[i][3]/(scaleValX*10^xscale))+x
-        local yval = (HEIGHT/2)+(solarSystems[i][5]/(scaleValY*10^yscale))+y
-        if xval > 0 and xval < WIDTH and yval > 0 and yval < HEIGHT then
-            strokeWidth(0)
-
-            if secStatus <= 0.00 then
-                fill(255, 0, 0, 255)
-            elseif secStatus <= 0.49 then
-                fill(255, 220, 0, 255)
-            else
-                fill(42, 255, 0, 255)
-            end
-            if secStatus <= 0 and showNull == true then
-                ellipse(xval,yval,6,6)
-            elseif secStatus > 0 and showEmpire == true then
-                ellipse(xval,yval,6,6)
-            end
-        end
-
-    end
-    popStyle()
-end
 
 function drawLabel()
 
-    for i,v in pairs(solarSystems) do
+    for i,v in pairs(starHandle.data) do
 
-        local secStatus = round(solarSystems[i][6],2)
+        local secStatus = round(v.sysSec,2)
 
-        local xval = (WIDTH/2)+(solarSystems[i][3]/(scaleValX*10^xscale))+x
-        local yval = (HEIGHT/2)+(solarSystems[i][5]/(scaleValY*10^yscale))+y
+        local xval = (WIDTH/2)+(v.sysPos.x / (scaleValX*10^xscale))+x
+        local yval = (HEIGHT/2)+(v.sysPos.y / (scaleValY*10^yscale))+y
         if (xval > (WIDTH/2-1.75) and xval < (WIDTH/2+1.75) and yval > (HEIGHT/2-1.75) and yval < (HEIGHT/2+1.75)) then
             if ((showEmpire == true and secStatus > 0) or (showNull == true and secStatus <= 0)) and infoBar == true then
                 
                 gotoSystem(i)
                 
-                local systemName = solarSystems[i][2]
-                local regionName = solarSystems[i][1]
+                local systemName = v.sysName
+                local regionName = v.sysRegion
                 
                 if lastSys ~= systemName then
                     gettingSysData = false
@@ -131,13 +22,19 @@ function drawLabel()
                 sysBar = true
                 sysBarName = systemName
                 
-                if gettingSysData == false then
-                    getSysData(systemName)
+                if gettingSysData == false and v.sysOwningAlliance == nil then
+                    v:getOwningFactionData()
                     gettingSysData = true
                 end
                 
                 if sysDotlanData ~= nil then
-                    handleSysDotlanData()
+                    v:handleOwningFactionData()
+                    gettingSysData = false
+                end
+                
+                if sysAllianceImg ~= nil then
+                    v.sysOwningAllianceImg = sysAllianceImg
+                    sysAllianceImg = nil
                 end
                 
                 pushStyle()
@@ -156,20 +53,20 @@ function drawLabel()
                 fill(255, 255, 255, 255)
                 text(systemName,(WIDTH-250+(245/2)),HEIGHT-565+435)
                     
-                if sysAllianceImg ~= nil and sysAlliance ~= nil then
-                    sprite(sysAllianceImg,WIDTH-250+30,HEIGHT-565+420,56,56)
+                if v.sysOwningAllianceImg ~= nil and v.sysOwningAlliance ~= nil then
+                    sprite(v.sysOwningAllianceImg,WIDTH-250+30,HEIGHT-565+425,45,45)
                 else
-                    sprite("Eve Live View:7_64_4",WIDTH-250+30,HEIGHT-565+420,56,56)
+                    sprite("Eve Live View:7_64_4",WIDTH-250+30,HEIGHT-565+425,45,45)
                 end
                     
                 fontSize(14)
                 font("AmericanTypewriter")
                 fill(249, 249, 249, 255)
                 text(regions[regionName],(WIDTH-250+(245/2)),HEIGHT-565+420)
-                if sysAlliance ~= nil then
+                if v.sysOwningAlliance ~= nil then
                     pushStyle()
-                    fontSize(12)
-                    text(sysAlliance,WIDTH-250+(245/2),HEIGHT-565+402)
+                    fontSize(10)
+                    text(v.sysOwningAlliance,WIDTH-250+(245/2),HEIGHT-565+396)
                     popStyle()
                 end
                 
@@ -184,18 +81,14 @@ function drawLabel()
                     
                 local displayedJumps = {}
                 local yPosOffset = HEIGHT-565+330
-                for n,m in pairs(solarSystemJumps) do
+                for n,m in ipairs(v.jumps) do
                         
-                    local sourceSystem = m[2]
-                    local destSystem = m[3]
+                    local destSystem = m
                         
-                    if sourceSystem == i then
-                        sprite("Eve Live View:38_16_251",WIDTH-250+18,yPosOffset+9)
-                        text(solarSystems[destSystem][2],WIDTH-250+30,yPosOffset)
-                        yPosOffset=yPosOffset-20
-                        sourceSystem = nil
-                        destSystem = nil
-                    end
+                    sprite("Eve Live View:38_16_251",WIDTH-250+18,yPosOffset+9)
+                    text(starHandle.data[destSystem].sysName,WIDTH-250+30,yPosOffset)
+                    yPosOffset=yPosOffset-20
+                    destSystem = nil
                 end
                     
                     
@@ -219,9 +112,9 @@ function drawLabel()
             popStyle()
                 
             systemSelected = i
-            regionSelected = solarSystems[i][1]
+            regionSelected = v.sysRegion
             
-            lastSys = solarSystems[i][2]
+            lastSys = v.sysName
 
             return
         else

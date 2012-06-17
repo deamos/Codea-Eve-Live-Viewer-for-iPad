@@ -1,7 +1,7 @@
 
 function getXYSystem(sysID)
-    local xval = (solarSystems[sysID][3]/(scaleValX*10^xscale))
-    local yval = (solarSystems[sysID][5]/(scaleValY*10^yscale))
+    local xval = (starHandle.data[sysID].sysPos.x/(scaleValX*10^xscale))
+    local yval = (starHandle.data[sysID].sysPos.y/(scaleValY*10^yscale))
     local deltax = -xval
     local deltay = -yval
     local deltaPos=vec2(deltax,deltay)
@@ -18,7 +18,7 @@ function performSystemSearch()
     local systemName = kbBuffer
     
     for i,v in pairs(solarSystems) do
-        if string.lower(solarSystems[i][2]) == string.lower(systemName) then
+        if string.lower(starHandle.data[i].sysName) == string.lower(systemName) then
 
             gotoSystem(i)
             
@@ -44,8 +44,8 @@ function typeNameToId(name)
 end
 
 function sysNameToId(sysName)
-    for i,v in pairs(solarSystems) do
-        if string.lower(solarSystems[i][2]) == string.lower(sysName) then
+    for i,v in pairs(starHandle.data) do
+        if string.lower(starHandle.data[i].sysName) == string.lower(sysName) then
             return i
         end
     end
@@ -60,8 +60,8 @@ function handleSearchResults()
         kbBuffer = ""
     end
     if kbBuffer ~= "" and string.len(kbBuffer) > 2 then
-        for a,b in pairs(solarSystems) do
-            sysSearchName = solarSystems[a][2]
+        for a,b in pairs(starHandle.data) do
+            sysSearchName = starHandle.data[a].sysName
             searchLen = string.len(kbBuffer)
             systID = a
             if string.lower(string.sub(sysSearchName,1,searchLen)) == string.lower(kbBuffer) then
@@ -158,33 +158,8 @@ function splitAndRestoreKMFilters()
     end
 end
 
-function getSysData(systemName)
-    local url = "http://evemaps.dotlan.net/system/"..systemName.."/kills"
-    sysAlliance = nil
-    http.get(url,gotSysInfo)
-end
-
 function gotSysInfo(data,status,headers)
     sysDotlanData = data
-end
-
-function handleSysDotlanData()
-
-    sysAlliance = string.match(sysDotlanData,'/alliance/[%a%p]+"')
-    
-    if sysAlliance ~= nil then
-        sysAlliance = string.sub(sysAlliance,11,string.len(sysAlliance)-1)
-        sysAlliance = string.gsub(sysAlliance,"_"," ")
-        local sysAllianceURL = string.match(sysDotlanData,'http://e.dotlan.net/images/Alliance/[%d]+_128.png')
-    
-        getSysAllianceImg(sysAllianceURL)
-    end
-    
-    
-    
-    sysDotlanData = nil
-    
-    return sysAlliance
 end
 
 function gotSysAllianceImage(data,status,header)

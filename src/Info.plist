@@ -21,8 +21,6 @@
 		<string>MainFunctionsTouch</string>
 		<string>MainVariables</string>
 		<string>mapRegions</string>
-		<string>mapSolarSystem</string>
-		<string>mapSolarSystemJumps</string>
 		<string>Notification</string>
 		<string>HistoricalNotifications</string>
 		<string>MathFunctions</string>
@@ -30,13 +28,16 @@
 		<string>SettingsFunctionsDrawing</string>
 		<string>SettingsFunctionTouch</string>
 		<string>Split</string>
+		<string>Stars</string>
 		<string>XmlParser</string>
+		<string>mapSolarSystem</string>
+		<string>mapSolarSystemJumps</string>
 	</array>
 	<key>Created</key>
 	<string>2012-05-06 15:58:58 +0000</string>
 	<key>Description</key>
 	<string>Eve Online Real-Time Killmail Display
-Version:1.2
+Version:1.3
 Written by Dave Lockwood</string>
 </dict>
 </plist>

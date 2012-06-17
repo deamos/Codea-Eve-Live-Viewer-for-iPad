@@ -25,7 +25,7 @@ function NotificationHandler:draw()
             --Handler for Kill Notifications
             if killNotifications == true and (self.list[1].type == "Kill") then
                 local systemName = self.list[1].parameters[2]
-                local secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
+                local secStatus = round(starHandle.data[sysNameToId(systemName)].sysSec,2)
                 
                 if (secStatus >0 and showEmpire == true) or (secStatus <= 0 and showNull == true) then
                 
@@ -85,14 +85,14 @@ function Notification:draw()
     
     if self.type == "Kill" then
         systemName = self.parameters[2]
-        regionName = regions[solarSystems[sysNameToId(systemName)][1]]
-        secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
+        regionName = regions[starHandle.data[sysNameToId(systemName)].sysRegion]
+        secStatus = round(starHandle.data[sysNameToId(systemName)].sysSec,2)
         sysID = sysNameToId(systemName)
         iskValue = tonumber(self.parameters[14])
         victimShipClass = self.parameters[15]
 
-        xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
-        yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
+        xval = (WIDTH/2)+(starHandle.data[sysID].sysPos.x / (scaleValX*10^xscale))+x
+        yval = (HEIGHT/2)+(starHandle.data[sysID].sysPos.y / (scaleValY*10^yscale))+y
     
         if kmFiltersToggle == false then
             self:handleNotificationTimer()
@@ -171,8 +171,8 @@ function Notification:draw()
     elseif self.type == "dotLanRSS" and dotlanNotifications == true then
         if self.parameters[5] ~= nil then
             local sysID = sysNameToId(self.parameters[5])
-            xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
-            yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
+            xval = (WIDTH/2)+(starHandle.data[sysID].sysPos.x / (scaleValX*10^xscale))+x
+            yval = (HEIGHT/2)+(starHandle.data[sysID].sysPos.y / (scaleValY*10^yscale))+y
             self:drawBeacon(xval,yval)
         end
         
@@ -528,12 +528,12 @@ end
 function Notification:drawSysIndicator()
     if self.type == "Kill" then
         local systemName = self.parameters[2]
-        local regionName = regions[solarSystems[sysNameToId(systemName)][1]]
-        local secStatus = round(solarSystems[sysNameToId(systemName)][6],2)
+        local regionName = regions[starHandle.data[sysNameToId(systemName)].sysRegion]
+        local secStatus = round(starHandle.data[sysNameToId(systemName)].sysSec,2)
         local sysID = sysNameToId(systemName)
 
-        local xval = (WIDTH/2)+(solarSystems[sysID][3]/(scaleValX*10^xscale))+x
-        local yval = (HEIGHT/2)+(solarSystems[sysID][5]/(scaleValY*10^yscale))+y
+        local xval = (WIDTH/2)+(starHandle.data[sysID].sysPos.x / (scaleValX*10^xscale))+x
+        local yval = (HEIGHT/2)+(starHandle.data[sysID].sysPos.y/(scaleValY*10^yscale))+y
     
         pushStyle()
         sprite("Eve Live View:38_16_208",xval-8,yval+10)

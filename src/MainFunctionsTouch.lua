@@ -42,7 +42,7 @@ function handleTouchMove(touch)
     
     elseif touch.state == ENDED then
         drawLines = true
-        initialTouch = vec2(touch.x,touch.y)
+        --initialTouch = vec2(touch.x,touch.y)
     end
 end
 

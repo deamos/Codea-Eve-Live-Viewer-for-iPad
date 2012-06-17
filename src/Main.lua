@@ -1,7 +1,7 @@
 supportedOrientations(PORTRAIT_ANY)
 -- Use this function to perform your initial setup
 function setup()
-    version = "1.2"
+    version = "1.3"
     database = "Inferno"
     saveProjectInfo("Author", "David Lockwood")
     saveProjectInfo("Description", "Eve Online Real-Time Killmail Display\nVersion:"..version.."\nWritten by Dave Lockwood")
@@ -12,6 +12,8 @@ function setup()
     
     setDefaultValues()
     loadSavedData()
+    
+    starHandle = StarHandler()
     
     notifyHandle = NotificationHandler()
     dotLanRSSHandle = DotlanRSS()
@@ -38,12 +40,8 @@ function draw()
         strokeWidth(2)
         
         tick()          
-    
-        if linesByNone == false then --or drawLines == true then
-            drawlines()
-        end
         
-        drawStars()
+        starHandle:draw()
        
         if mapStarLinesToggle == true then
             drawStarLinesBar()
