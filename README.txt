@@ -1,4 +1,4 @@
-Eve Live Viewer 1.1
+Eve Live Viewer 1.3
 Author: David Lockwood
 ----------------------------------
 Full Download can be found at (https://www.dropbox.com/sh/9ypujjn74tzh2rq/ds9Zre9gUR)
@@ -19,13 +19,19 @@ Install:
 5:Copy Eve Live Viewer.codea to the /Apps/com.twolivesleft.Codify/Documents directory
 6:Run Codea
 
-Known Issues v1.2:
+Known Issues v1.3:
 -------------
 -Landscape Mode has some Display Issues, Disabled until Fixed.
 
 
 Version History:
 -------------
+-v1.3(6/17/2012)
+--Began Streamlining and Rewriting Some Code for organization and Speed.
+--Slight Overall Performance Increases
+--Altered the Size of Alliance Pictures in the System Info Bar as well as the Alliance Name
+--Darkened Notification Bar Background for easier reading.
+
 -v1.2(6/15/2012)
 --Cleaned up some minor code
 --Began incorporating Historical Notification Code (Not Active/working yet)
